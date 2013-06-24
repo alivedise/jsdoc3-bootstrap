@@ -68,7 +68,7 @@
 
         <tr>
             <?js if (params.hasName) {?>
-                <td class="name"><code><?js= param.name ?></code></td>
+                <td class="name"><?js= param.name ?></td>
             <?js } ?>
 
             <td class="type">
@@ -80,15 +80,15 @@
             <?js if (params.hasAttributes) {?>
                 <td class="attributes">
                 <?js if (param.optional) { ?>
-                    &lt;optional><br>
+                    <span class="label">optional</span>&nbsp;
                 <?js } ?>
 
                 <?js if (param.nullable) { ?>
-                    &lt;nullable><br>
+                    <span class="label">nullable</span>&nbsp;
                 <?js } ?>
 
                 <?js if (param.variable) { ?>
-                    &lt;repeatable><br>
+                    <span class="label">repeatable</span>&nbsp;
                 <?js } ?>
                 </td>
             <?js } ?>

@@ -25,16 +25,15 @@ var self = this;
     <?js } ?>
 
     <?js if (data.inherited && data.inherits) { ?>
-    <dt class="inherited-from">Inherited From:</dt>
-    <dd class="inherited-from"><ul class="dummy"><li>
+    <dd class="inherited-from"><ul class="dummy breadcrumb"><li>Inherited From:</li><li>
         <?js= this.linkto(data.inherits, this.htmlsafe(data.inherits)) ?>
     </li></dd>
     <?js } ?>
     
     <?js if (data.deprecated) { ?>
-        <dt class="important tag-deprecated">Deprecated:</dt><?js
-            if (data.deprecated === true) { ?><dd class="yes-def tag-deprecated"><ul class="dummy"><li>Yes</li></ul></dd><?js }
-            else { ?><dd><ul class="dummy"><li><?js= data.deprecated ?></li><ul></dd><?js }
+        <?js
+            if (data.deprecated === true) { ?><span class="yes-def tag-deprecated"><ul class="dummy inline"><li><span class="important tag-deprecated label label-warning">Deprecated</span> Yes</li></ul></span><?js }
+            else { ?><span><ul class="dummy inline"><li><span class="important tag-deprecated label label-warning">Deprecated</span> <?js= data.deprecated ?></li></ul></span><?js }
         ?>
     <?js } ?>
     
@@ -79,12 +78,10 @@ var self = this;
     <?js } ?>
     
     <?js if (data.see && see.length) {?>
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul><?js see.forEach(function(s) { ?>
-            <li><?js= self.linkto(s) ?></li>
-        <?js }); ?></ul>
-    </dd>
+    <ul class="inline"><li><dt class="tag-see">See:</dt></li>
+        <?js see.forEach(function(s) { ?>
+            <li><?js= self.linkto(s, s, 'btn') ?></li>
+        <?js }); ?>
     <?js } ?>
     
     <?js if (data.todo && todo.length) {?>

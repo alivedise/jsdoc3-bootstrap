@@ -33,7 +33,7 @@
     <?js if (doc.augments && doc.augments.length) { ?>        
         <ul class="breadcrumb">
             <li>Extends</li><?js doc.augments.forEach(function(a) { ?>
-            <li><?js= self.linkto(a, a) ?></li>
+            <li><?js= self.linkto(a, a, 'btn btn-primary') ?></li>
         <?js }); ?></ul>
     <?js } ?>
 
@@ -62,9 +62,11 @@
     <?js if (doc.mixes && doc.mixes.length) { ?>
         <h3 class="subsection-title">Mixes In</h3>
         
-        <ul><?js doc.mixes.forEach(function(a) { ?>
-            <li><?js= self.linkto(a, a) ?></li>
-        <?js }); ?></ul>
+        <ul class="inline">
+        <?js doc.mixes.forEach(function(a) { ?>
+        <li><?js= self.linkto(a, a, 'btn btn-info') ?></li>
+        <?js }); ?>
+        </ul>
     <?js } ?>
     
     <?js

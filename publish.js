@@ -204,14 +204,14 @@ function buildNav(members) {
         classNav = '';
 
     if (members.modules.length) {
-        nav += '<div class="well"><ul class="nav nav-list"><li class="nav-header">Modules</li>';
+        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Modules</li>';
         //grimbo: use ModuleHelper to trim module path off module link
         nav += new ModuleHelper(members.modules, linkto).printModules();
         nav += '</ul></div>';
     }
 
     if (members.externals.length) {
-        nav += '<div class="well"><ul class="nav nav-list"><li class="nav-header">External</li>';
+        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">External</li>';
         members.externals.forEach(function(e) {
             if ( !hasOwnProp.call(seen, e.longname) ) {
                 nav += '<li>'+linkto( e.longname, e.name.replace(/(^"|"$)/g, '') )+'</li>';
@@ -231,17 +231,17 @@ function buildNav(members) {
         });
 
         if (classNav !== '') {
-            nav += '<div class="well"><ul class="nav nav-list"><li class="nav-header">Classes</li>';
+            nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Classes</li>';
             nav += classNav;
             nav += '</ul></div>';
         }
     }
 
     if (members.events.length) {
-        nav += '<div class="well"><ul class="nav nav-list"><li class="nav-header">Events</li>';
+        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Events</li>';
         members.events.forEach(function(e) {
-            if ( !hasOwnProp.call(seen, e.longname) ) {
-                nav += '<li>'+linkto(e.longname, '<i class="icon-beaker" style="color: #339966"></i> ' + e.memberof + '/' + e.name)+'</li>';
+            if ( !hasOwnProp.call(seen, e.longname) && !e.inherited ) {
+                nav += '<li>'+linkto(e.longname, '<i class="icon-bell-alt" style="color: #339966"></i> ' + e.name +' <span class="label label-inverse pull-right">' + e.memberof + '</span>')+'</li>';
             }
             seen[e.longname] = true;
         });
@@ -250,7 +250,7 @@ function buildNav(members) {
     }
 
     if (members.namespaces.length) {
-        nav += '<div class="well"><ul class="nav nav-list"><li class="nav-header">Namespaces</li>';
+        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Namespaces</li>';
         members.namespaces.forEach(function(n) {
             if ( !hasOwnProp.call(seen, n.longname) ) {
                 nav += '<li>'+linkto(n.longname, '<i class="icon-code"></i> ' + n.name)+'</li>';
@@ -262,10 +262,10 @@ function buildNav(members) {
     }
 
     if (members.mixins.length) {
-        nav += '<div class="well"><ul class="nav nav-list"><li class="nav-header">Mixins</li>';
+        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Mixins</li>';
         members.mixins.forEach(function(m) {
             if ( !hasOwnProp.call(seen, m.longname) ) {
-                nav += '<li>'+linkto(m.longname, m.name)+'</li>';
+                nav += '<li>'+linkto(m.longname, '<i class="icon-beaker"></i> ' + m.name)+'</li>';
             }
             seen[m.longname] = true;
         });
@@ -274,7 +274,7 @@ function buildNav(members) {
     }
 
     if (members.tutorials.length) {
-        nav += '<div class="well"><ul class="nav nav-list"><li class="nav-header">Tutorials</li>';
+        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Tutorials</li>';
         members.tutorials.forEach(function(t) {
             nav += '<li>'+tutoriallink(t.name)+'</li>';
         });
@@ -283,7 +283,7 @@ function buildNav(members) {
     }
 
     if (members.globals.length) {
-        nav += '<div class="well"><ul class="nav nav-list"><li class="nav-header">Global</li>';
+        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Global</li>';
         members.globals.forEach(function(g) {
             if ( g.kind !== 'typedef' && !hasOwnProp.call(seen, g.longname) ) {
                 nav += '<li>'+linkto(g.longname, '<i class="icon-globe" style="color: black;"></i> ' + g.name)+'</li>';
@@ -499,7 +499,7 @@ exports.publish = function(taffyData, opts, tutorials) {
 
             var myMixins = helper.find(mixins, {longname: longname});
             if (myMixins.length) {
-                generate('Mixin: ' + myMixins[0].name, myMixins, helper.longnameToUrl[longname]);
+                generate('<i class="icon-beaker"></i> ' + myMixins[0].name, myMixins, helper.longnameToUrl[longname]);
             }
 
             var myExternals = helper.find(externals, {longname: longname});

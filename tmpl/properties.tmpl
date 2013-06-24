@@ -68,7 +68,7 @@
 	
         <tr>
             <?js if (props.hasName) {?>
-                <td class="name"><code><?js= prop.name ?></code></td>
+                <td class="name"><?js= prop.name ?></td>
             <?js } ?>
             
             <td class="type">
@@ -80,11 +80,11 @@
             <?js if (props.hasAttributes) {?>
                 <td class="attributes">
                 <?js if (prop.optional) { ?>
-                    &lt;optional><br>
+                    <span class="label">optional</span>&nbsp;
                 <?js } ?>
                     
                 <?js if (prop.nullable) { ?>
-                    &lt;nullable><br>
+                    <span class="label">nullable</span>&nbsp;
                 <?js } ?>
                 </td>
             <?js } ?>

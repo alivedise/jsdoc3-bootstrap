@@ -18,8 +18,8 @@ var self = this;
     <?js } ?>
 
     <?js if (kind === 'event' && data.type && data.type.names) {?>
-        <h5>Type:</h5>
-        <ul>
+        <ul class="breadcrumb">
+            <li>Type: </li>
             <li>
                 <?js= self.partial('type.tmpl', data.type.names) ?>
             </li>
