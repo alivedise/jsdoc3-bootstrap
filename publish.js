@@ -238,12 +238,24 @@ function buildNav(members) {
     }
 
     if (members.events.length) {
-        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Events</li>';
+        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Public Events</li>';
         members.events.forEach(function(e) {
             if ( !hasOwnProp.call(seen, e.longname) && !e.inherited ) {
-                nav += '<li>'+linkto(e.longname, '<i class="icon-bell-alt" style="color: #339966"></i> ' + e.name +' <span class="label label-inverse pull-right">' + e.memberof + '</span>')+'</li>';
+                if (e.access !== 'private') {
+                    nav += '<li>'+linkto(e.longname, '<i class="icon-bell-alt" style="color: yellow"></i> ' + e.name +' <span class="label label-inverse pull-right">' + e.memberof + '</span>')+'</li>';
+                    seen[e.longname] = true;
+                }
             }
-            seen[e.longname] = true;
+        });
+
+        nav += '</ul></div>';
+
+        nav += '<div class="well well-small"><ul class="nav nav-list"><li class="nav-header">Private Events</li>';
+        members.events.forEach(function(e) {
+            if ( e.access && e.access == 'private') {
+                nav += '<li>'+linkto(e.longname, '<i class="icon-bell-alt" style="color: yellow"></i> ' + e.name +' <span class="label label-inverse pull-right">' + e.memberof + '</span>')+'</li>';
+                seen[e.longname] = true;
+            }
         });
 
         nav += '</ul></div>';

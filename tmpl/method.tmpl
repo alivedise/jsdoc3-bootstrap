@@ -13,7 +13,9 @@ var self = this;
     
     <?js if (data.description) { ?>
     <div class="description">
-        <?js= data.description ?>
+        <p>
+        <?js= data.description.replace(/\n\n/g, '</p><p>') ?>
+        </p>
     </div>
     <?js } ?>
 
