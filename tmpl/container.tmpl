@@ -95,6 +95,28 @@
     
     <?js
         var members = self.find({kind: 'member', memberof: title === 'Global' ? {isUndefined: true} : doc.longname});
+        if (members && members.length) { 
+    ?>
+        <div class="panel panel-default">
+            <h3 class="subsection-title">Members</h3>
+            <?js= self.partial('member-list.tmpl', members) ?>
+        </div>
+    
+    <?js } ?>
+    
+    <?js
+        var methods = self.find({kind: 'function', memberof: title === 'Global' ? {isUndefined: true} : doc.longname});
+        if (methods && methods.length) { 
+    ?>
+        <div class="panel panel-default">
+            <h3 class="subsection-title">Methods</h3>
+            <?js= self.partial('method-list.tmpl', methods) ?>
+        </div>
+    
+    <?js } ?>
+    
+    <?js
+        var members = self.find({kind: 'member', memberof: title === 'Global' ? {isUndefined: true} : doc.longname});
         if (members && members.length && members.forEach) { 
     ?>
         <h3 class="subsection-title">Members</h3>
